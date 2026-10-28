@@ -3,541 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LingoGO - Academia Virtual de Inglés</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for icons -->
+    <title>LingoGO - Academia de Inglés Virtual</title>
+    <!-- FontAwesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-        }
-        
-        /* Custom styles matching LMS layout */
-        .header-top {
-            background-color: #ffffff;
-        }
-        
-        .nav-bar {
-            background-color: #2b78b8;
-        }
-        
-        .nav-tab-active {
-            background-color: #1a588b;
+        :root {
+            --primary-blue: #2a6fb0;
+            --dark-blue: #1b4b7a;
+            --accent-red: #b02a2a;
+            --light-bg: #f4f6f9;
+            --card-border: #e2e8f0;
+            --star-gold: #ffc107;
         }
 
-        .login-box {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: #333;
+        }
+
+        /* Top Header Contact Bar */
+        .top-contact-bar {
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            padding: 6px 20px;
+            font-size: 13px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 20px;
+            color: #555;
+        }
+
+        .top-contact-bar span i {
+            color: var(--primary-blue);
+            margin-right: 5px;
+        }
+
+        /* Main Header */
+        header {
+            background: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            color: var(--dark-blue);
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark-blue);
+            letter-spacing: 1px;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--primary-blue);
+            display: flex;
+            padding: 0 30px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+
+        nav a.active {
+            background-color: var(--dark-blue);
+        }
+
+        nav a:hover:not(.active) {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Container Layout */
+        .main-container {
+            display: flex;
+            gap: 30px;
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Sidebar Login */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+        }
+
+        .login-card {
+            background: white;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
-        /* Course Card Styling based on image */
-        .course-card {
-            background: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        .lang-select-container {
+            margin-bottom: 15px;
         }
 
-        .course-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        .lang-select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #fff;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 10px 10px 35px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-login:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .login-links {
+            margin-top: 15px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .login-links a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: block;
+            margin-top: 6px;
+        }
+
+        .login-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .content {
+            flex-grow: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+            font-size: 14px;
+        }
+
+        /* Course Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
         .card-banner {
-            position: relative;
             height: 150px;
-            overflow: hidden;
-            border-top-left-radius: 6px;
-            border-top-right-radius: 6px;
-        }
-
-        .card-vertical-tag {
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 32px;
-            background: rgba(15, 23, 42, 0.4);
-            backdrop-filter: blur(2px);
-            color: #ffffff;
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
+            position: relative;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 2px;
         }
 
-        .card-badge-icon {
+        .card-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.75), rgba(42, 111, 176, 0.75));
+        }
+
+        .vertical-brand {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: center center;
+            color: rgba(255, 255, 255, 0.4);
+            font-weight: 900;
+            font-size: 24px;
+            letter-spacing: 4px;
+            z-index: 2;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .btn-info-circle {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            color: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .corner-badge {
             position: absolute;
             bottom: 10px;
             right: 10px;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
+            background-color: var(--accent-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            font-size: 16px;
+            z-index: 2;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
-        .card-info-btn {
-            position: absolute;
-            bottom: 6px;
-            left: 38px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: white;
-            color: #333;
+        .card-body {
+            padding: 15px;
             display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .course-folder {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .course-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
+            text-decoration: none;
+            line-height: 1.3;
+        }
+
+        .course-title:hover {
+            text-decoration: underline;
+        }
+
+        .rating-container {
+            margin-top: auto;
+        }
+
+        .stars {
+            color: var(--star-gold);
+            font-size: 16px;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        .stats-text {
+            font-size: 11px;
+            color: #777;
+        }
+
+        /* Modal para Administración */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
-            font-weight: bold;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-            cursor: pointer;
         }
 
-        .star-rating i {
-            cursor: pointer;
-            transition: color 0.15s;
+        .modal.active {
+            display: flex;
         }
 
-        /* Modal Overlay */
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(2px);
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 900px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col text-gray-800">
+<body>
 
-    <!-- TOP HEADER -->
-    <header class="header-top py-3 px-4 md:px-12 flex items-center justify-between border-b border-gray-100">
-        <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.reload()">
-            <!-- Logo Icon (Graduation Cap + Globe theme) -->
-            <div class="relative flex items-center justify-center w-12 h-12 bg-blue-700 rounded-lg text-white shadow-md">
-                <i class="fa-solid fa-graduation-cap text-2xl"></i>
-                <i class="fa-solid fa-globe absolute -top-1 -right-1 text-xs bg-amber-400 text-blue-900 rounded-full p-0.5"></i>
-            </div>
-            <div>
-                <span class="text-3xl font-extrabold tracking-tight text-blue-900">Lingo<span class="text-blue-600">GO</span></span>
-                <span class="block text-xs text-gray-500 font-medium -mt-1">Virtual English Academy</span>
-            </div>
-        </div>
+    <!-- Bar de Contacto Superior -->
+    <div class="top-contact-bar">
+        <span><i class="fas fa-phone-alt"></i> Tel: +51 925 380 601</span>
+        <span><i class="fas fa-envelope"></i> brandomra9231@gmail.com</span>
+    </div>
 
-        <div class="hidden sm:flex items-center space-x-4 text-xs text-gray-600">
-            <span class="flex items-center"><i class="fa-solid fa-phone text-blue-600 mr-1.5"></i> +51 925380601 LINGO</span>
-            <span class="flex items-center"><i class="fa-solid fa-envelope text-blue-600 mr-1.5"></i> brandomra9231@gmail.com</span>
-        </div>
+    <!-- Cabecera Principal -->
+    <header>
+        <a href="#" class="logo-container">
+            <i class="fas fa-graduation-cap logo-icon"></i>
+            <span class="logo-text">LingoGO</span>
+        </a>
     </header>
 
-    <!-- NAVIGATION BAR -->
-    <nav class="nav-bar text-white shadow-md">
-        <div class="max-w-7xl mx-auto flex items-center px-4 md:px-8">
-            <button id="tab-home" onclick="switchTab('home')" class="nav-tab-active px-6 py-2.5 text-sm font-semibold flex items-center space-x-2 border-b-2 border-amber-400 focus:outline-none transition">
-                <i class="fa-solid fa-house text-xs"></i>
-                <span>Página principal</span>
-            </button>
-            <button id="tab-courses" onclick="switchTab('courses')" class="px-6 py-2.5 text-sm font-semibold hover:bg-blue-800 flex items-center space-x-2 focus:outline-none transition">
-                <i class="fa-solid fa-book-open text-xs"></i>
-                <span>Cursos</span>
-            </button>
-            <button id="tab-levels" onclick="switchTab('levels')" class="px-6 py-2.5 text-sm font-semibold hover:bg-blue-800 flex items-center space-x-2 focus:outline-none transition hidden md:flex">
-                <i class="fa-solid fa-layer-group text-xs"></i>
-                <span>Niveles Marco Europeo</span>
-            </button>
-        </div>
+    <!-- Menú de Navegación Azul -->
+    <nav>
+        <a href="#" class="active">Página principal</a>
+        <a href="#">Cursos</a>
     </nav>
 
-    <!-- MAIN CONTENT CONTAINER -->
-    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-8">
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            
-            <!-- LEFT SIDEBAR: LOGIN & LANGUAGE -->
-            <aside class="lg:col-span-1 space-y-4">
-                <div class="login-box p-5 rounded-lg">
-                    
-                    <!-- Language Selector -->
-                    <div class="mb-4">
-                        <label for="lang-select" class="block text-xs font-semibold text-gray-600 mb-1">Idioma de la interfaz</label>
-                        <div class="relative">
-                            <select id="lang-select" onchange="changeLanguage()" class="w-full bg-white border border-gray-300 rounded px-3 py-2 text-sm text-gray-700 appearance-none focus:outline-none focus:border-blue-500">
-                                <option value="es">🇪🇸 Español</option>
-                                <option value="en">🇺🇸 English</option>
-                            </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
-                                <i class="fa-solid fa-chevron-down text-xs"></i>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Contenido Principal -->
+    <div class="main-container">
 
-                    <!-- Login Form -->
-                    <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-3">
-                        <div>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                                    <i class="fa-solid fa-user text-xs"></i>
-                                </span>
-                                <input type="text" id="username" required placeholder="Nombre de usuario" class="w-full pl-8 pr-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none">
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="relative">
-                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
-                                    <i class="fa-solid fa-lock text-xs"></i>
-                                </span>
-                                <input type="password" id="password" required placeholder="Contraseña" class="w-full pl-8 pr-3 py-1.5 text-sm border border-gray-300 rounded focus:ring-1 focus:ring-blue-500 focus:border-blue-500 outline-none">
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-1.5 px-4 rounded text-sm transition shadow-sm">
-                            Entrar
-                        </button>
-
-                        <div class="text-center pt-2">
-                            <a href="#" onclick="showModal('Restablecer Contraseña', 'Se ha enviado un enlace de recuperación a su correo institucional.')" class="text-xs text-blue-600 hover:underline">
-                                ¿Ha olvidado su contraseña?
-                            </a>
-                        </div>
-                    </form>
+        <!-- Barra Lateral Izquierda: Inicio de Sesión -->
+        <aside class="sidebar">
+            <div class="login-card">
+                <div class="lang-select-container">
+                    <select class="lang-select">
+                        <option>🇪🇸 Español</option>
+                        <option>🇺🇸 English</option>
+                    </select>
                 </div>
-
-                <!-- Live Campus Notice Banner -->
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-xs text-blue-900 space-y-2">
-                    <div class="flex items-center font-bold text-blue-800">
-                        <i class="fa-solid fa-circle-info mr-2 text-sm text-blue-600"></i>
-                        <span id="txt-notice-title">Aviso de Matrícula</span>
-                    </div>
-                    <p id="txt-notice-body" class="text-gray-600 leading-relaxed">
-                        Inscripciones abiertas para el ciclo intensivo del próximo mes. Clases 100% en vivo por Zoom con docentes nativos.
-                    </p>
-                </div>
-            </aside>
-
-            <!-- RIGHT CONTENT AREA: COURSES GRID -->
-            <section class="lg:col-span-3">
                 
-                <!-- Section Header & Filters -->
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-gray-200 mb-6 gap-3">
-                    <h1 id="txt-main-title" class="text-xl md:text-2xl font-bold text-gray-800 tracking-tight">
-                        Cursos más populares
-                    </h1>
-
-                    <!-- Search Filter Box -->
-                    <div class="relative w-full sm:w-64">
-                        <input type="text" id="searchInput" oninput="filterCourses()" placeholder="Buscar curso de inglés..." class="w-full pl-8 pr-3 py-1 text-xs border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <i class="fa-solid fa-search absolute left-3 top-2 text-gray-400 text-xs"></i>
+                <form id="student-login-form">
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Nombre de usuario" required>
                     </div>
-                </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Contraseña" required>
+                    </div>
 
-                <!-- 6 Courses Grid (2 Rows x 3 Columns) -->
-                <div id="coursesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Dynamic rendering by JavaScript -->
-                </div>
-            </section>
-        </div>
-    </main>
+                    <button type="submit" class="btn-login">Entrar</button>
+                </form>
 
-    <!-- FOOTER -->
-    <footer class="bg-gray-800 text-gray-300 text-xs py-6 mt-12 border-t border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div>
-                <p class="font-semibold text-white">© 2026 LingoGO Virtual English Academy.</p>
-                <p class="text-gray-400">Plataforma Educativa de Aprendizaje de Idiomas LMS.</p>
-            </div>
-            <div class="flex space-x-4 text-gray-400">
-                <a href="#" class="hover:text-white">Términos de servicio</a>
-                <a href="#" class="hover:text-white">Política de privacidad</a>
-                <a href="#" class="hover:text-white">Soporte Técnico</a>
-            </div>
-        </div>
-    </footer>
-
-    <!-- INTERACTIVE MODAL FOR DETAILS & ALERTS -->
-    <div id="infoModal" class="fixed inset-0 modal-overlay hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-lg max-w-md w-full p-6 shadow-2xl relative animate-fade-in">
-            <button onclick="closeModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-lg">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="flex items-center space-x-3 mb-4">
-                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg">
-                    <i class="fa-solid fa-graduation-cap"></i>
+                <div class="login-links">
+                    <a href="#">¿Ha olvidado su contraseña?</a>
+                    <a href="#" id="open-admin-link" style="color: var(--accent-red); margin-top: 15px; font-weight: bold;">
+                        <i class="fas fa-user-shield"></i> Acceso Administrador
+                    </a>
                 </div>
-                <h3 id="modalTitle" class="text-lg font-bold text-gray-800">Detalles del Curso</h3>
             </div>
-            <p id="modalBody" class="text-sm text-gray-600 mb-6 leading-relaxed">
-                Cargando información...
-            </p>
-            <div class="flex justify-end">
-                <button onclick="closeModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm font-medium">
-                    Aceptar
-                </button>
+        </aside>
+
+        <!-- Área Principal de Cursos -->
+        <main class="content">
+            <div class="section-header">
+                <h2 class="section-title">Cursos más populares</h2>
+                <input type="text" id="search-input" class="search-box" placeholder="Buscar curso...">
+            </div>
+
+            <!-- Grilla de Tarjetas -->
+            <div class="courses-grid" id="courses-container">
+                <!-- Cursos cargados dinámicamente desde Firebase -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Login/Panel de Administrador -->
+    <div class="modal" id="admin-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Panel de Administración</h3>
+                <span class="close-btn" id="close-modal">&times;</span>
+            </div>
+
+            <!-- Formulario Login Admin -->
+            <div id="admin-login-view">
+                <div class="form-group">
+                    <label>Correo de Administrador</label>
+                    <input type="email" id="admin-email" value="admin@lingogo.com">
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="admin-password" value="admin123">
+                </div>
+                <button class="btn-login" id="btn-admin-login">Ingresar como Admin</button>
+            </div>
+
+            <!-- Panel de Creación de Temas/Cursos (Post-login) -->
+            <div id="admin-panel-view" style="display: none;">
+                <form id="add-course-form">
+                    <div class="form-group">
+                        <label>Carpeta / Nivel</label>
+                        <select id="course-folder-input" required>
+                            <option value="Inglés Básico (A1-A2)">Inglés Básico (A1-A2)</option>
+                            <option value="Inglés Intermedio (B1-B2)">Inglés Intermedio (B1-B2)</option>
+                            <option value="Inglés Avanzado (C1)">Inglés Avanzado (C1)</option>
+                            <option value="Inglés de Negocios">Inglés de Negocios</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Título del Tema / Curso</label>
+                        <input type="text" id="course-title-input" placeholder="Ej: Speaking & Fluency" required>
+                    </div>
+                    <div class="form-group">
+                        <label>URL de Imagen de Fondo (Banner)</label>
+                        <input type="url" id="course-img-input" placeholder="https://..." required>
+                    </div>
+                    <button type="submit" class="btn-login" style="background-color: #28a745;">
+                        <i class="fas fa-plus"></i> Publicar Tema
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // Courses Data matching LMS Style and English Academy theme
-        const coursesData = [
-            {
-                id: 1,
-                title: "Inglés General: A1 - A2",
-                desc: "Fundamentos conversacionales, gramática básica y vocabulario cotidiano para principiantes.",
-                category: "Básico",
-                bgGradient: "linear-gradient(135deg, #2563eb, #1d4ed8)",
-                badgeIcon: "fa-solid fa-book",
-                badgeBg: "#ef4444", // Red circle icon badge
-                votes: 167,
-                visits: 4284,
-                userRating: 5,
-                tagColor: "rgba(37, 99, 235, 0.9)"
-            },
-            {
-                id: 2,
-                title: "Business English Master",
-                desc: "Comunicación profesional, presentación de proyectos, redacción de emails y negociaciones.",
-                category: "Avanzado",
-                bgGradient: "linear-gradient(135deg, #4f46e5, #3730a3)",
-                badgeIcon: "fa-solid fa-briefcase",
-                badgeBg: "#dc2626",
-                votes: 154,
-                visits: 3315,
-                userRating: 4,
-                tagColor: "rgba(79, 70, 229, 0.9)"
-            },
-            {
-                id: 3,
-                title: "Preparación TOEFL & IELTS",
-                desc: "Simulacros intensivos, estrategias de examen de lectura, escucha, escritura y conversación.",
-                category: "Certificación",
-                bgGradient: "linear-gradient(135deg, #991b1b, #7f1d1d)",
-                badgeIcon: "fa-solid fa-certificate",
-                badgeBg: "#b91c1c",
-                votes: 157,
-                visits: 2062,
-                userRating: 5,
-                tagColor: "rgba(153, 27, 27, 0.9)"
-            },
-            {
-                id: 4,
-                title: "English for Kids & Teens",
-                desc: "Aprendizaje dinámico e interactivo mediante juegos, música y storytelling guiado.",
-                category: "Niños",
-                bgGradient: "linear-gradient(135deg, #1d4ed8, #1e40af)",
-                badgeIcon: "fa-solid fa-child",
-                badgeBg: "#ef4444",
-                votes: 111,
-                visits: 1269,
-                userRating: 4,
-                tagColor: "rgba(29, 78, 216, 0.9)"
-            },
-            {
-                id: 5,
-                title: "Speaking & Pronunciation Club",
-                desc: "Club de conversación diario con profesores nativos para fluidez y corrección fonética.",
-                category: "Conversación",
-                bgGradient: "linear-gradient(135deg, #312e81, #1e1b4b)",
-                badgeIcon: "fa-solid fa-comments",
-                badgeBg: "#dc2626",
-                votes: 89,
-                visits: 1825,
-                userRating: 5,
-                tagColor: "rgba(49, 46, 129, 0.9)"
-            },
-            {
-                id: 6,
-                title: "Grammar & Vocabulary Mastery",
-                desc: "Dominio de estructuras gramaticales complejas, phrasal verbs y modismos avanzados.",
-                category: "Avanzado",
-                bgGradient: "linear-gradient(135deg, #15803d, #14532d)",
-                badgeIcon: "fa-solid fa-spell-check",
-                badgeBg: "#991b1b",
-                votes: 150,
-                visits: 4339,
-                userRating: 4,
-                tagColor: "rgba(21, 128, 61, 0.9)"
-            }
+    <!-- Firebase SDK (Modular Versión 10) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // TUS CLAVES REALES DE FIREBASE
+        const firebaseConfig = {
+            apiKey: "AIzaSyAMRnwxrVLT1lraQ_DHI3SGIssbd-c8CjU",
+            authDomain: "lingogo-academy.firebaseapp.com",
+            projectId: "lingogo-academy",
+            storageBucket: "lingogo-academy.firebasestorage.app",
+            messagingSenderId: "768329774264",
+            appId: "1:768329774264:web:51f1281d9bf8f19108304d"
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Cursos por defecto si la BD está vacía
+        const defaultCourses = [
+            { folder: "Inglés Básico", title: "Gramática Fundamental & Vocabulario", votes: 157, visits: 2062, rating: 5, bg: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=600&q=80" },
+            { folder: "Inglés Intermedio", title: "Speaking & Pronunciation Intensive", votes: 154, visits: 3315, rating: 4, bg: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" },
+            { folder: "Inglés Avanzado", title: "Business English & Presentations", votes: 167, visits: 4284, rating: 5, bg: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" }
         ];
 
-        // Render Courses Cards Grid
-        function renderCourses(list) {
-            const grid = document.getElementById('coursesGrid');
-            grid.innerHTML = '';
+        const container = document.getElementById('courses-container');
 
-            if (list.length === 0) {
-                grid.innerHTML = `<div class="col-span-full text-center py-8 text-gray-500 text-sm">No se encontraron cursos que coincidan con la búsqueda.</div>`;
-                return;
+        // Escuchar cambios en Firestore en tiempo real
+        onSnapshot(collection(db, "courses"), (snapshot) => {
+            let courses = [];
+            snapshot.forEach(doc => {
+                courses.push({ id: doc.id, ...doc.data() });
+            });
+
+            if (courses.length === 0) {
+                renderCourses(defaultCourses);
+            } else {
+                renderCourses(courses);
             }
+        });
 
-            list.forEach(course => {
+        function renderCourses(list) {
+            container.innerHTML = '';
+            list.forEach(c => {
                 const card = document.createElement('div');
-                card.className = 'course-card flex flex-col justify-between';
-
-                // Star rating HTML
-                let starsHTML = '';
-                for (let i = 1; i <= 5; i++) {
-                    const colorClass = i <= course.userRating ? 'text-amber-400' : 'text-gray-300';
-                    starsHTML += `<i class="fa-solid fa-star text-xs ${colorClass}" onclick="rateCourse(${course.id}, ${i})"></i> `;
-                }
-
+                card.className = 'course-card';
                 card.innerHTML = `
-                    <div>
-                        <!-- Banner Area with Color Overlay & Tag -->
-                        <div class="card-banner" style="background: ${course.bgGradient}">
-                            <!-- Vertical Brand Tag -->
-                            <div class="card-vertical-tag">LINGOGO</div>
-                            
-                            <!-- Central Subject Symbol illustration -->
-                            <div class="w-full h-full flex items-center justify-center opacity-25 text-white">
-                                <i class="${course.badgeIcon} text-7xl"></i>
-                            </div>
-
-                            <!-- Info Button bottom left -->
-                            <button class="card-info-btn" title="Información del curso" onclick="showModal('${course.title}', '${course.desc}')">
-                                i
-                            </button>
-
-                            <!-- Circular Icon Badge bottom right -->
-                            <div class="card-badge-icon" style="background-color: ${course.badgeBg}">
-                                <i class="${course.badgeIcon} text-sm"></i>
-                            </div>
+                    <div class="card-banner" style="background-image: url('${c.bg || c.image}');">
+                        <div class="card-banner-overlay"></div>
+                        <div class="vertical-brand">LingoGO</div>
+                        <div class="btn-info-circle">i</div>
+                        <div class="corner-badge"><i class="fas fa-book-open"></i></div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="course-folder">${c.folder || 'General'}</div>
+                            <a href="#" class="course-title">${c.title}</a>
                         </div>
-
-                        <!-- Card Content -->
-                        <div class="p-4">
-                            <h3 class="text-sm font-bold text-blue-700 hover:text-blue-900 cursor-pointer mb-2 leading-snug" onclick="showModal('${course.title}', '${course.desc}')">
-                                ${course.title}
-                            </h3>
-
-                            <!-- Star Rating -->
-                            <div class="star-rating mb-2">
-                                ${starsHTML}
+                        <div class="rating-container">
+                            <div class="stars">
+                                ${'★'.repeat(c.rating || 5)}${'☆'.repeat(5 - (c.rating || 5))}
                             </div>
-
-                            <!-- Footnote Stats -->
-                            <div class="text-[11px] text-gray-500 font-sans">
-                                <span>${course.votes} Votos</span> | 
-                                <span>${course.visits} Visitas</span> | 
-                                <span class="text-blue-600 hover:underline cursor-pointer" onclick="showModal('Votación', 'Su voto ha sido registrado correctamente para este curso.')">Su voto [?]</span>
-                            </div>
+                            <div class="stats-text">${c.votes || 10} Votos | ${c.visits || 100} Visitas</div>
                         </div>
                     </div>
                 `;
-
-                grid.appendChild(card);
+                container.appendChild(card);
             });
         }
 
-        // Rate Course function
-        function rateCourse(courseId, rating) {
-            const course = coursesData.find(c => c.id === courseId);
-            if (course) {
-                course.userRating = rating;
-                course.votes += 1;
-                renderCourses(coursesData);
-                showModal('Calificación Registrada', `¡Gracias por calificar el curso "${course.title}" con ${rating} estrellas!`);
-            }
-        }
+        // Manejo del Modal Admin
+        const modal = document.getElementById('admin-modal');
+        const openAdminLink = document.getElementById('open-admin-link');
+        const closeModal = document.getElementById('close-modal');
+        const btnAdminLogin = document.getElementById('btn-admin-login');
+        const adminLoginView = document.getElementById('admin-login-view');
+        const adminPanelView = document.getElementById('admin-panel-view');
+        const addCourseForm = document.getElementById('add-course-form');
 
-        // Filter Courses Search
-        function filterCourses() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = coursesData.filter(c => 
-                c.title.toLowerCase().includes(query) || 
-                c.desc.toLowerCase().includes(query)
-            );
-            renderCourses(filtered);
-        }
+        openAdminLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+        });
 
-        // Navigation Tabs Switcher
-        function switchTab(tabName) {
-            const tabs = ['home', 'courses', 'levels'];
-            tabs.forEach(t => {
-                const btn = document.getElementById(`tab-${t}`);
-                if (btn) {
-                    if (t === tabName) {
-                        btn.classList.add('nav-tab-active', 'border-b-2', 'border-amber-400');
-                        btn.classList.remove('hover:bg-blue-800');
-                    } else {
-                        btn.classList.remove('nav-tab-active', 'border-b-2', 'border-amber-400');
-                        btn.classList.add('hover:bg-blue-800');
-                    }
-                }
-            });
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
 
-            if (tabName === 'courses') {
-                document.getElementById('txt-main-title').innerText = "Todos los Cursos Disponibles";
-            } else if (tabName === 'levels') {
-                showModal("Niveles MCER", "LingoGO adapta todos sus programas al Marco Común Europeo de Referencia (A1, A2, B1, B2, C1, C2).");
+        btnAdminLogin.addEventListener('click', () => {
+            const email = document.getElementById('admin-email').value;
+            const pass = document.getElementById('admin-password').value;
+
+            if (email === "admin@lingogo.com" && pass === "admin123") {
+                adminLoginView.style.display = "none";
+                adminPanelView.style.display = "block";
+                document.getElementById('modal-title').innerText = "Panel de Administrador - Subir Tema";
             } else {
-                document.getElementById('txt-main-title').innerText = "Cursos más populares";
+                alert("Credenciales de administrador incorrectas.");
             }
-        }
+        });
 
-        // Login Handler
-        function handleLogin(event) {
-            event.preventDefault();
-            const user = document.getElementById('username').value;
-            showModal('Acceso al Campus Virtual', `¡Bienvenido(a) de nuevo, <strong>${user}</strong>! Redirigiendo a sus aulas virtuales de LingoGO...`);
-        }
+        // Guardar curso en Firestore
+        addCourseForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const folder = document.getElementById('course-folder-input').value;
+            const title = document.getElementById('course-title-input').value;
+            const bg = document.getElementById('course-img-input').value;
 
-        // Change Language Simulation
-        function changeLanguage() {
-            const lang = document.getElementById('lang-select').value;
-            if (lang === 'en') {
-                document.getElementById('txt-main-title').innerText = "Most Popular Courses";
-                document.getElementById('txt-notice-title').innerText = "Enrollment Notice";
-                document.getElementById('txt-notice-body').innerText = "Open registrations for next month's intensive cycle. 100% live classes with native speakers.";
-                document.getElementById('username').placeholder = "Username";
-                document.getElementById('password').placeholder = "Password";
-            } else {
-                document.getElementById('txt-main-title').innerText = "Cursos más populares";
-                document.getElementById('txt-notice-title').innerText = "Aviso de Matrícula";
-                document.getElementById('txt-notice-body').innerText = "Inscripciones abiertas para el ciclo intensivo del próximo mes. Clases 100% en vivo por Zoom con docentes nativos.";
-                document.getElementById('username').placeholder = "Nombre de usuario";
-                document.getElementById('password').placeholder = "Contraseña";
+            try {
+                await addDoc(collection(db, "courses"), {
+                    folder,
+                    title,
+                    bg,
+                    votes: Math.floor(Math.random() * 50) + 1,
+                    visits: Math.floor(Math.random() * 500) + 50,
+                    rating: 5,
+                    createdAt: new Date()
+                });
+
+                alert("¡Tema publicado con éxito en la web!");
+                addCourseForm.reset();
+                modal.classList.remove('active');
+            } catch (error) {
+                alert("Error al publicar: " + error.message);
             }
-        }
-
-        // Modal Helpers
-        function showModal(title, bodyText) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalBody').innerHTML = bodyText;
-            const modal = document.getElementById('infoModal');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('infoModal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // Close modal on click outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('infoModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        };
-
-        // On Load initialization
-        window.onload = function() {
-            renderCourses(coursesData);
-        };
+        });
     </script>
 </body>
 </html>
