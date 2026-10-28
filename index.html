@@ -584,11 +584,13 @@
                 courses.push({ id: doc.id, ...doc.data() });
             });
 
-            if (courses.length === 0) {
-                renderCourses(defaultCourses);
-            } else {
-                renderCourses(courses);
-            }
+           // Si hay menos de 3 cursos creados, completa los espacios con los de muestra
+if (courses.length < 3) {
+    const combined = [...courses, ...defaultCourses.slice(courses.length)];
+    renderCourses(combined);
+} else {
+    renderCourses(courses);
+}
         });
 
         function renderCourses(list) {
